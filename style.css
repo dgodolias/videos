@@ -1,52 +1,40 @@
-/* ============================================================
-   videos.dgodolias — Stitch dark theme + glass surfaces
-   Built on the Stitch design system (Google Sans + 28px radii +
-   glassmorphism + pill buttons). Dark variant.
-   ============================================================ */
+/* Stitch light theme, lifted from stitch.withgoogle.com */
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  /* Fonts */
   --font-display: "Google Sans Display", "Google Sans Text", -apple-system,
                   BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --font-body:    "Google Sans Text", "Google Sans Display", -apple-system,
                   BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-  --font-mono:    ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Monaco,
-                  Consolas, monospace;
+  --font-mono:    ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
 
-  /* Surfaces — semi-transparent over the animated gradient.
-     Slightly more opaque (0.08 baseline) so text stays legible over vibrant mesh. */
-  --bg:          #0a0a14;
-  --surface:     rgba(20, 20, 30, 0.55);
-  --surface-hi:  rgba(28, 28, 40, 0.65);
-  --surface-lo:  rgba(15, 15, 24, 0.55);
+  --bg:          #fbfaf7;
+  --surface:     rgba(255, 255, 255, 0.72);
+  --surface-hi:  rgba(255, 255, 255, 0.92);
+  --surface-lo:  rgba(248, 246, 242, 0.78);
 
-  /* Ink */
-  --ink:         #ffffff;
-  --ink-soft:    #e6e7eb;
-  --muted:       #9aa0b0;
-  --quiet:       #5b6275;
+  --ink:         #0a0a14;
+  --ink-soft:    #20222d;
+  --muted:       #5b6275;
+  --quiet:       #9aa0b0;
 
-  /* Lines + accents */
-  --hairline:        rgba(255, 255, 255, 0.08);
-  --hairline-strong: rgba(255, 255, 255, 0.22);
-  --accent:          #ffffff;
-  --accent-soft:     rgba(255, 255, 255, 0.06);
-  --code:            #b9f6ca;
+  --hairline:        rgba(10, 10, 20, 0.07);
+  --hairline-strong: rgba(10, 10, 20, 0.16);
+  --accent:          #0a0a14;
+  --accent-soft:     rgba(10, 10, 20, 0.05);
+  --code-bg:         #0e0e16;
+  --code-fg:         #e8e9ee;
 
-  /* Radii — Stitch generous rounding */
   --r-pill:  999px;
-  --r-card:  28px;
-  --r-input: 18px;
-  --r-chip:  14px;
+  --r-card:  24px;
+  --r-input: 16px;
+  --r-chip:  12px;
 
-  /* Shadows — soft layered */
-  --shadow-card:  0 1px 0 rgba(255,255,255,0.04),
-                  0 18px 48px -20px rgba(0,0,0,0.7);
-  --shadow-pop:   0 1px 0 rgba(255,255,255,0.06),
-                  0 10px 32px -8px rgba(0,0,0,0.55);
-  --shadow-focus: 0 0 0 4px rgba(255,255,255,0.08);
+  --shadow-card:  0 1px 0 rgba(10, 10, 20, 0.02),
+                  0 10px 28px -18px rgba(10, 10, 20, 0.12);
+  --shadow-pop:   0 1px 0 rgba(10, 10, 20, 0.04),
+                  0 8px 24px -10px rgba(10, 10, 20, 0.16);
 }
 
 * { box-sizing: border-box; }
@@ -58,7 +46,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100dvh;
-  background: transparent; /* allow ::before mesh + ::after vignette to render */
+  background: transparent;
   color: var(--ink-soft);
   font-family: var(--font-body);
   font-size: 15px;
@@ -68,321 +56,221 @@ body {
   position: relative;
 }
 
-/* Animated mesh background — gives glass surfaces something to render over.
-   Opacities are deliberately high; the only dimming layer is a soft vignette
-   in body::after so the gradient stays visible without washing out text. */
+/* One very subtle warm glow in the top-right. No animation, no second layer. */
 body::before {
   content: "";
   position: fixed;
-  inset: -15%;
-  z-index: -2;
-  background:
-    radial-gradient(50% 42% at 16% 18%, rgba(139, 92, 246, 0.85), transparent 65%),
-    radial-gradient(45% 38% at 84% 14%, rgba(236, 72, 153, 0.80), transparent 65%),
-    radial-gradient(48% 42% at 78% 82%, rgba(34, 211, 238, 0.70), transparent 65%),
-    radial-gradient(50% 45% at 18% 86%, rgba(251, 146, 60, 0.55), transparent 65%),
-    radial-gradient(60% 50% at 50% 50%, rgba(99, 102, 241, 0.35), transparent 70%);
-  filter: blur(80px) saturate(150%);
-  animation: drift 32s ease-in-out infinite alternate;
-}
-/* Soft vignette only — no full-page darkening overlay */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
+  inset: -20% -10% auto auto;
+  width: 70vw;
+  height: 70vh;
   z-index: -1;
-  background:
-    radial-gradient(120% 80% at 50% 50%, transparent 35%, rgba(10,10,20,0.55) 100%);
+  background: radial-gradient(closest-side, rgba(255, 200, 150, 0.22), transparent 70%);
+  filter: blur(40px);
   pointer-events: none;
-}
-@keyframes drift {
-  0%   { transform: translate3d(0,0,0) scale(1) rotate(0deg); }
-  100% { transform: translate3d(-4%, 3%, 0) scale(1.12) rotate(2deg); }
 }
 
 a { color: var(--ink); text-decoration: none; }
-a:hover { opacity: 0.85; }
+a:hover { color: var(--ink-soft); }
 
-::selection { background: rgba(255,255,255,0.18); color: #fff; }
+::selection { background: rgba(10,10,20,0.12); color: var(--ink); }
 
-/* Display type — tight, Google Sans Display */
 h1, h2, h3 {
   font-family: var(--font-display);
   color: var(--ink);
-  letter-spacing: -0.018em;
-  line-height: 1.08;
+  letter-spacing: -0.015em;
+  line-height: 1.16;
   font-weight: 500;
   margin: 0;
 }
 
-/* Container */
 .wrap {
-  max-width: 980px;
+  max-width: 760px;
   margin: 0 auto;
-  padding: 56px 24px 96px;
+  padding: 72px 24px 96px;
 }
 @media (max-width: 640px) {
-  .wrap { padding: 36px 18px 72px; }
+  .wrap { padding: 40px 20px 72px; }
 }
 
-/* ============================================================
-   Header / Hero
-   ============================================================ */
-.hero { margin-bottom: 48px; }
-.hero .brand-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 28px;
+/* Landing hero */
+.hero { margin-bottom: 40px; }
+.hero .brand {
   color: var(--muted);
   font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0.02em;
-}
-.hero .brand-row .dot {
-  width: 8px; height: 8px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #f472b6, #818cf8);
-  box-shadow: 0 0 12px rgba(248,113,166,0.55);
+  margin-bottom: 20px;
 }
 .hero h1 {
-  font-size: clamp(40px, 7vw, 64px);
-  margin-bottom: 18px;
-  background: linear-gradient(180deg, #ffffff 30%, rgba(255,255,255,0.65));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: clamp(30px, 4vw, 38px);
+  margin-bottom: 10px;
 }
-.hero p.lede {
-  font-size: clamp(15px, 1.7vw, 18px);
-  color: var(--ink-soft);
-  max-width: 60ch;
+.hero p {
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 52ch;
   margin: 0;
-  opacity: 0.86;
 }
 
 /* Sub-page header */
-.subhead {
-  margin-bottom: 36px;
-}
+.subhead { margin-bottom: 32px; }
 .subhead .crumb {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 7px 14px 7px 12px;
+  gap: 6px;
+  padding: 6px 12px 6px 10px;
   border-radius: var(--r-pill);
   background: var(--surface);
   border: 1px solid var(--hairline);
   color: var(--muted);
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 500;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
   transition: background 0.15s, border-color 0.15s, color 0.15s;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
 }
-.subhead .crumb:hover { background: var(--surface-hi); color: var(--ink); border-color: var(--hairline-strong); opacity: 1; }
-.subhead .crumb svg { width: 14px; height: 14px; }
+.subhead .crumb:hover { background: var(--surface-hi); color: var(--ink); border-color: var(--hairline-strong); }
+.subhead .crumb svg { width: 13px; height: 13px; stroke: currentColor; }
 .subhead h1 {
-  font-size: clamp(30px, 5vw, 42px);
-  margin-bottom: 12px;
+  font-size: clamp(26px, 3.4vw, 32px);
+  margin-bottom: 8px;
 }
 .subhead p {
-  color: var(--ink-soft);
-  opacity: 0.78;
-  max-width: 56ch;
+  color: var(--muted);
+  font-size: 14.5px;
+  max-width: 52ch;
   margin: 0;
 }
 
-/* ============================================================
-   Video list — glass cards
-   ============================================================ */
+/* Video list */
 .video-list {
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 16px;
+  gap: 10px;
 }
-.video-list li {
-  opacity: 0;
-  transform: translateY(8px);
-  animation: rise 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
-}
-.video-list li:nth-child(1) { animation-delay: 0.05s; }
-.video-list li:nth-child(2) { animation-delay: 0.10s; }
-.video-list li:nth-child(3) { animation-delay: 0.15s; }
-.video-list li:nth-child(4) { animation-delay: 0.20s; }
-.video-list li:nth-child(5) { animation-delay: 0.25s; }
-@keyframes rise {
-  to { opacity: 1; transform: translateY(0); }
-}
-
 .card-link {
   display: flex;
   align-items: center;
-  gap: 18px;
-  padding: 22px 24px;
+  gap: 14px;
+  padding: 16px 18px;
   background: var(--surface);
   border: 1px solid var(--hairline);
   border-radius: var(--r-card);
   backdrop-filter: blur(20px) saturate(140%);
   -webkit-backdrop-filter: blur(20px) saturate(140%);
   box-shadow: var(--shadow-card);
-  transition: transform 0.18s ease,
-              background 0.18s,
-              border-color 0.18s,
-              box-shadow 0.22s;
+  transition: background 0.18s, border-color 0.18s, transform 0.15s;
   text-decoration: none;
   color: inherit;
 }
 .card-link:hover {
   background: var(--surface-hi);
   border-color: var(--hairline-strong);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-pop);
-  opacity: 1;
+  transform: translateY(-1px);
+  color: inherit;
 }
-.card-link .badge {
+.card-link .icon {
   flex-shrink: 0;
-  width: 52px; height: 52px;
+  width: 40px; height: 40px;
   display: grid; place-items: center;
-  border-radius: 16px;
-  background: linear-gradient(135deg, rgba(244,114,182,0.18), rgba(129,140,248,0.18));
-  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  background: var(--accent-soft);
   color: var(--ink);
 }
-.card-link .badge svg { width: 22px; height: 22px; }
+.card-link .icon svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.7; }
 .card-link .meta { flex: 1; min-width: 0; }
 .card-link .title {
   font-family: var(--font-display);
-  font-size: 19px;
+  font-size: 16px;
   font-weight: 500;
-  letter-spacing: -0.012em;
   color: var(--ink);
-  margin: 0 0 3px;
+  letter-spacing: -0.01em;
+  display: block;
+  margin-bottom: 2px;
 }
 .card-link .sub {
-  font-size: 13.5px;
+  font-size: 13px;
   color: var(--muted);
 }
-.card-link .arrow {
+.card-link .chev {
+  color: var(--quiet);
   flex-shrink: 0;
-  width: 36px; height: 36px;
-  display: grid; place-items: center;
-  border-radius: 999px;
-  background: var(--accent-soft);
-  border: 1px solid var(--hairline);
-  color: var(--ink);
-  transition: transform 0.18s, background 0.18s;
 }
-.card-link:hover .arrow { transform: translateX(3px); background: var(--surface-hi); }
-.card-link .arrow svg { width: 14px; height: 14px; }
+.card-link .chev svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+.card-link:hover .chev { color: var(--ink); }
 
-/* ============================================================
-   Prompt page — glass code card with pill copy button
-   ============================================================ */
+/* Prompt page */
 .prompt-card {
-  background: var(--surface);
+  background: var(--code-bg);
   border: 1px solid var(--hairline);
   border-radius: var(--r-card);
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
   box-shadow: var(--shadow-card);
   overflow: hidden;
-  opacity: 0;
-  transform: translateY(8px);
-  animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.08s forwards;
 }
 .prompt-card .toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 18px 14px 22px;
-  border-bottom: 1px solid var(--hairline);
-  background: var(--surface-lo);
+  padding: 12px 14px 12px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.03);
 }
 .prompt-card .toolbar .label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--muted);
-  font-size: 12.5px;
+  color: rgba(255,255,255,0.55);
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.02em;
-}
-.prompt-card .toolbar .label .pulse {
-  width: 6px; height: 6px;
-  border-radius: 999px;
-  background: #6ee7b7;
-  box-shadow: 0 0 10px rgba(110,231,183,0.7);
+  font-family: var(--font-mono);
 }
 .btn-pill {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  padding: 10px 20px;
+  gap: 7px;
+  min-height: 36px;
+  padding: 8px 16px;
   border: 0;
   background: var(--ink);
-  color: var(--bg);
+  color: #fff;
   font-family: inherit;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0;
   cursor: pointer;
   border-radius: var(--r-pill);
-  box-shadow: var(--shadow-pop);
-  transition: transform 0.12s, background 0.18s, box-shadow 0.18s;
+  transition: background 0.15s, transform 0.08s;
 }
-.btn-pill:hover { background: #f4f4f7; transform: translateY(-1px); }
-.btn-pill:active { transform: translateY(0); }
-.btn-pill.copied { background: #6ee7b7; color: #052e1f; }
-.btn-pill svg { width: 14px; height: 14px; }
+.btn-pill:hover { background: #1a1a26; }
+.btn-pill:active { transform: scale(0.98); }
+.btn-pill.copied { background: #2c8a4e; }
+.btn-pill svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; }
 
 .prompt-card pre {
   margin: 0;
-  padding: 24px 26px;
-  font: 13.5px/1.6 var(--font-mono);
-  color: var(--code);
+  padding: 20px 22px;
+  font: 13px/1.65 var(--font-mono);
+  color: var(--code-fg);
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow-x: auto;
-  max-height: 60vh;
+  max-height: 58vh;
 }
-.prompt-card pre::-webkit-scrollbar { width: 10px; }
+.prompt-card pre::-webkit-scrollbar { width: 8px; }
 .prompt-card pre::-webkit-scrollbar-track { background: transparent; }
-.prompt-card pre::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.08);
-  border-radius: 999px;
-}
+.prompt-card pre::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.10); border-radius: 999px; }
 
-/* Instructions card */
+/* Steps */
 .steps {
-  margin-top: 28px;
-  padding: 26px 28px;
-  background: var(--surface-lo);
+  margin-top: 22px;
+  padding: 22px 24px;
+  background: var(--surface);
   border: 1px solid var(--hairline);
   border-radius: var(--r-card);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 .steps h2 {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--ink);
-  letter-spacing: 0.04em;
-  text-transform: none;
-  margin-bottom: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-.steps h2::before {
-  content: "";
-  width: 18px; height: 1.5px;
-  background: var(--ink);
-  display: inline-block;
+  margin-bottom: 12px;
 }
 .steps ol {
   margin: 0;
@@ -393,40 +281,39 @@ h1, h2, h3 {
 .steps ol li {
   counter-increment: step;
   position: relative;
-  padding: 10px 0 10px 38px;
+  padding: 8px 0 8px 34px;
   color: var(--ink-soft);
-  font-size: 14.5px;
-  line-height: 1.55;
+  font-size: 14px;
+  line-height: 1.6;
 }
 .steps ol li::before {
   content: counter(step);
   position: absolute;
-  left: 0; top: 10px;
-  width: 26px; height: 26px;
+  left: 0; top: 9px;
+  width: 22px; height: 22px;
   display: grid; place-items: center;
   border-radius: 999px;
-  background: var(--surface);
+  background: var(--accent-soft);
   border: 1px solid var(--hairline);
   color: var(--ink);
   font-family: var(--font-display);
-  font-size: 12.5px;
+  font-size: 11.5px;
   font-weight: 500;
 }
 .steps code {
   font-family: var(--font-mono);
-  font-size: 13px;
-  padding: 1px 7px;
+  font-size: 12.5px;
+  padding: 1px 6px;
   background: var(--accent-soft);
   border: 1px solid var(--hairline);
-  border-radius: 6px;
+  border-radius: 5px;
   color: var(--ink);
 }
-.steps em { font-style: normal; color: var(--ink); font-weight: 500; }
+.steps strong { color: var(--ink); font-weight: 500; }
 
-/* Footer */
 footer {
-  margin-top: 64px;
-  padding-top: 24px;
+  margin-top: 56px;
+  padding-top: 18px;
   border-top: 1px solid var(--hairline);
   color: var(--muted);
   font-size: 12.5px;
@@ -434,25 +321,16 @@ footer {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
 }
 footer a { color: var(--muted); }
 footer a:hover { color: var(--ink); }
 
-/* ============================================================
-   Reduced motion + small screens
-   ============================================================ */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001s !important;
-    transition-duration: 0.001s !important;
-  }
-  body::before { animation: none; }
+  * { transition-duration: 0.001s !important; }
 }
 @media (max-width: 540px) {
-  .card-link { padding: 18px 18px; gap: 14px; }
-  .card-link .badge { width: 44px; height: 44px; border-radius: 14px; }
-  .card-link .title { font-size: 17px; }
-  .prompt-card pre { padding: 18px 18px; font-size: 12.5px; }
-  .steps { padding: 22px 20px; }
+  .card-link { padding: 14px; gap: 12px; }
+  .prompt-card pre { padding: 16px 16px; font-size: 12.5px; }
+  .steps { padding: 18px 18px; }
 }
