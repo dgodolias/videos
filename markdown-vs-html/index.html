@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Markdown ή HTML για Claude Code; — αναφορές</title>
+  <meta name="description" content="Πηγές, αριθμοί και αντιλόγοι για το «unreasonable effectiveness of HTML» blog post της Anthropic.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Display:wght@400;500;700&family=Google+Sans+Text:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .ref-grid { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+    .ref-card { background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--r-card); padding: 18px 20px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+    .ref-card h2 { font-size: 17px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; margin: 0 0 8px; }
+    .ref-card p { margin: 0; color: var(--ink-soft); font-size: 14.5px; }
+    .ref-card a { color: var(--ink); border-bottom: 1px solid var(--hairline-strong); }
+    .ref-card a:hover { border-bottom-color: var(--ink); }
+    .ref-card .meta { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+    .quote-block { border-left: 3px solid var(--ink); padding: 4px 0 4px 14px; margin: 12px 0 0; font-style: italic; color: var(--ink-soft); }
+    .quote-block .cite { display: block; margin-top: 6px; font-style: normal; font-size: 12.5px; color: var(--muted); }
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0 0; }
+    @media (max-width: 640px) { .compare { grid-template-columns: 1fr; } }
+    .compare > div { background: var(--surface-lo); border: 1px solid var(--hairline); border-radius: var(--r-input); padding: 14px; }
+    .compare h3 { font-size: 13px; font-weight: 500; color: var(--muted); margin: 0 0 8px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .compare pre { margin: 0; font: 12.5px/1.55 var(--font-mono); color: var(--ink); white-space: pre-wrap; }
+    .compare .html-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+    .chip-high { display: inline-block; padding: 3px 9px; border-radius: 999px; background: #d93b3b; color: #fff; font-size: 11.5px; font-weight: 500; }
+    .chip-low  { display: inline-block; padding: 3px 9px; border-radius: 999px; background: #c9ccd5; color: #2a2a35; font-size: 11.5px; font-weight: 500; }
+    .diff-add  { display: block; background: #e7f4ec; color: #08732e; padding: 4px 8px; border-radius: 4px; font: 12px/1.5 var(--font-mono); }
+    .diff-rem  { display: block; background: #fbe6e6; color: #8a1a1a; padding: 4px 8px; border-radius: 4px; font: 12px/1.5 var(--font-mono); margin-top: 4px; }
+    .score-bar { margin-top: 10px; }
+    .score-bar .lbl { font-size: 12.5px; color: var(--muted); margin-bottom: 4px; }
+    .score-bar .bar { height: 8px; background: #e8e6e2; border-radius: 999px; overflow: hidden; }
+    .score-bar .bar > div { height: 100%; width: 40%; background: #d97706; }
+    table.tokens { width: 100%; border-collapse: collapse; margin: 12px 0 0; font-size: 14px; }
+    table.tokens th, table.tokens td { padding: 9px 10px; border-bottom: 1px solid var(--hairline); text-align: left; }
+    table.tokens th { font-weight: 500; color: var(--muted); font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.04em; }
+    table.tokens .accent { color: #b45309; font-weight: 500; }
+    .try-card .prompt-mini { margin: 10px 0 0; background: #0e0e16; color: var(--code-fg); padding: 14px 16px; border-radius: var(--r-input); font: 13px/1.6 var(--font-mono); white-space: pre-wrap; word-wrap: break-word; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="subhead">
+      <a class="crumb" href="../">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        <span>videos</span>
+      </a>
+      <h1>Markdown ή HTML για Claude Code;</h1>
+      <p>Πηγές, αριθμοί και ο αντίλογος. Όλα όσα αναφέρει το βίντεο μαζεμένα εδώ.</p>
+    </section>
+
+    <ul class="ref-grid">
+
+      <li class="ref-card">
+        <h2>1. Το blog post</h2>
+        <p><a href="https://claude.com/blog/using-claude-code-the-unreasonable-effectiveness-of-html" target="_blank" rel="noopener">«Using Claude Code: The unreasonable effectiveness of HTML»</a> από τον Thariq Shihipar, Anthropic Claude Code team.</p>
+        <p class="meta">Δημοσιεύτηκε Μάιος 2026. Διάβασμα: ~5 λεπτά.</p>
+        <div class="quote-block">
+          «I have honestly stopped using Markdown altogether for almost everything, but I'm probably far on the HTML maximalist side of things.»
+          <span class="cite">Thariq Shihipar, στο ίδιο post</span>
+        </div>
+        <div class="quote-block">
+          «The real reason I use HTML instead of Markdown is that it helps me feel much more in the loop with Claude.»
+          <span class="cite">Thariq Shihipar</span>
+        </div>
+      </li>
+
+      <li class="ref-card">
+        <h2>2. Πόσο viral έγινε</h2>
+        <p>Το X post του author <a href="https://x.com/trq212/status/2052809885763747935" target="_blank" rel="noopener">έκανε ~4.4M views σε 16 ώρες</a>, ~8M στις πρώτες 24 ώρες, 15.700 bookmarks.</p>
+        <p>Στο Hacker News: <a href="https://news.ycombinator.com/item?id=48071940" target="_blank" rel="noopener">528 points, 274 σχόλια</a>.</p>
+        <p>Endorsement από τον Simon Willison: <a href="https://simonwillison.net/2026/May/8/unreasonable-effectiveness-of-html/" target="_blank" rel="noopener">«caused me to reconsider that, especially for output»</a>.</p>
+      </li>
+
+      <li class="ref-card">
+        <h2>3. Markdown vs HTML, ίδιο PR review</h2>
+        <p>Ο πιο γρήγορος τρόπος να καταλάβεις τι αλλάζει: δες το ίδιο review και στις δύο μορφές.</p>
+        <div class="compare">
+          <div>
+            <h3>Markdown</h3>
+<pre># PR Review #142
+
+## Issues
+- auth.ts: missing error handler (high)
+- db.ts: N+1 query (high)
+- utils.ts: dead code (low)
+- README.md: outdated example (low)
+
+## Score
+- 2 high, 2 low</pre>
+          </div>
+          <div>
+            <h3>HTML artifact</h3>
+            <div style="font-weight:500;color:var(--ink);margin-bottom:4px;">PR Review #142</div>
+            <div style="font-size:12.5px;color:var(--muted);margin-bottom:10px;">auth · db · utils · README</div>
+            <div class="html-row">
+              <span class="chip-high">HIGH · auth.ts</span>
+              <span class="chip-high">HIGH · db.ts</span>
+            </div>
+            <div class="html-row">
+              <span class="chip-low">LOW · utils.ts</span>
+              <span class="chip-low">LOW · README</span>
+            </div>
+            <code class="diff-add">+ try { await handle() } catch (e) { … }</code>
+            <code class="diff-rem">- await handle()</code>
+            <div class="score-bar">
+              <div class="lbl">Score 4/10</div>
+              <div class="bar"><div></div></div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="ref-card">
+        <h2>4. Πόσο κοστίζει σε tokens</h2>
+        <p>Empirical PR-review test από τον <a href="https://pasqualepillitteri.it/en/news/2243/html-vs-markdown-claude-code-thariq-anthropic" target="_blank" rel="noopener">Pasquale Pillitteri (2026)</a>:</p>
+        <table class="tokens">
+          <thead>
+            <tr><th>Format</th><th>Tokens</th><th>% του 1M context</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Plain Markdown</td><td>1.140</td><td>0,11 %</td></tr>
+            <tr><td>Lean semantic HTML</td><td>2.760</td><td>0,28 %</td></tr>
+            <tr><td class="accent">Full HTML (CSS, badges, diff)</td><td class="accent">5.480</td><td class="accent">0,55 %</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:12px;">Δηλαδή πενταπλάσιο σε absolute terms, αλλά μόλις μισό τοις εκατό του Opus 4.7 context window. Η αντίρρηση «too expensive» δεν στέκει για final deliverables.</p>
+      </li>
+
+      <li class="ref-card">
+        <h2>5. Ο αντίλογος</h2>
+        <p>Η HN κοινότητα δεν αγόρασε ομόφωνα. Τα πιο δυνατά counters:</p>
+        <div class="quote-block">
+          «By gravitating to HTML you lose the ability for a human (you!) to easily co-author the document with the LLM. If it's just an explainer for your consumption, that's not a concern — but if it's a spec sheet for something more complex, I deeply value being able to dive in and edit what is produced for me.»
+          <span class="cite">tmhrtly, Hacker News · <a href="https://news.ycombinator.com/item?id=48071940" target="_blank" rel="noopener">thread</a></span>
+        </div>
+        <div class="quote-block">
+          «Have we gone full circle? From the invention of HTML to the rebirth of plain text with MD to rediscovery of HTML.»
+          <span class="cite">ocimbote, Hacker News</span>
+        </div>
+        <p style="margin-top:14px;">Η πιο συμπυκνωμένη διατύπωση από <a href="https://theaiarchitects.com/blog/markdown-vs-html-claude-code" target="_blank" rel="noopener">AI Architects</a>: <strong>«Markdown for agents, HTML for humans.»</strong> Όταν το output πάει σε άλλο model (agent chain), το Markdown είναι φθηνότερο και ευκολότερο να παρσάρει. Όταν πάει σε άνθρωπο, το HTML δίνει την επιπλέον πληροφορία που το post συζητάει.</p>
+      </li>
+
+      <li class="ref-card try-card">
+        <h2>6. Δοκίμασέ το</h2>
+        <p>Άνοιξε το Claude (chat ή Claude Code) και δώσε αυτό:</p>
+        <pre class="prompt-mini">Φτιάξε μου ένα HTML artifact για το παρακάτω: <τι θέλεις, π.χ. PR review, dashboard, weekly report>.
+
+Όχι plain bullets. Θέλω color-coded sections, badges για severity, και ένα μικρό chart όπου ταιριάζει. Self-contained &lt;style&gt;, χωρίς external CDN.</pre>
+        <p style="margin-top:10px;">Σύγκρινε το result με το αντίστοιχο σε Markdown — θα δεις άμεσα τι αναφέρει ο Thariq.</p>
+      </li>
+
+    </ul>
+
+    <footer>
+      <a href="../">videos</a>
+      <a href="https://github.com/dgodolias/videos" target="_blank" rel="noopener">github</a>
+    </footer>
+  </main>
+</body>
+</html>
