@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>graphify — οδηγός</title>
+  <meta name="description" content="Κάνε οποιονδήποτε φάκελο knowledge graph και ρώτα τον μέσα από το Claude Code.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Display:wght@400;500;700&family=Google+Sans+Text:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <main class="wrap">
+    <section class="subhead">
+      <a class="crumb" href="../">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        <span>videos</span>
+      </a>
+      <h1>graphify</h1>
+      <p>Κάνε οποιονδήποτε φάκελο, κώδικα, docs ή PDF, έναν χάρτη που δείχνει πώς συνδέονται όλα. Μετά το Claude Code ρωτάει τον χάρτη αντί να ξαναδιαβάζει κάθε αρχείο, οπότε γλιτώνεις tokens. Είναι open source και τρέχει στον υπολογιστή σου.</p>
+    </section>
+
+    <div class="prompt-card">
+      <div class="toolbar">
+        <span class="label">commands</span>
+        <button id="copy" class="btn-pill" type="button" aria-label="Copy commands to clipboard">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+          <span id="copy-label">Copy</span>
+        </button>
+      </div>
+      <pre id="prompt-text"># 1. Εγκατάσταση (μία φορά, στο terminal)
+pip install graphifyy && graphify install
+
+# 2. Φτιάξε τον χάρτη — μέσα στο Claude Code, στον φάκελό σου
+/graphify .
+
+# 3. Ρώτα το (το AI κοιτάζει τον χάρτη, δεν ξαναδιαβάζει τα αρχεία)
+/graphify query "πώς συνδέεται το Χ με το Υ;"</pre>
+    </div>
+
+    <section class="steps">
+      <h2>Βήματα αναλυτικά</h2>
+      <ol>
+        <li>Χρειάζεσαι <strong>Claude Code</strong> και <strong>Python 3.10+</strong> στον υπολογιστή σου. Δεν χρειάζεσαι API key, χρησιμοποιεί τη σύνδεση που έχει ήδη το Claude.</li>
+        <li>Άνοιξε ένα terminal και τρέξε μία φορά: <code>pip install graphifyy &amp;&amp; graphify install</code>. Το package λέγεται <code>graphifyy</code> (με δύο y), η εντολή μένει <code>graphify</code>. Σε Windows, αν δεν το βρίσκει μετά, δοκίμασε <code>pipx install graphifyy</code>.</li>
+        <li>Άνοιξε το <strong>Claude Code</strong> μέσα στον φάκελο ή το project που θες να καταλάβεις.</li>
+        <li>Γράψε <code>/graphify .</code> για να φτιάξει τον χάρτη όλου του φακέλου. Σου δημιουργεί έναν φάκελο <code>graphify-out/</code> με ένα διαδραστικό <code>graph.html</code> που το ανοίγεις και στον browser.</li>
+        <li>Ρώτα ό,τι θες: <code>/graphify query "η ερώτησή σου"</code>. Το AI απαντάει κοιτάζοντας τον χάρτη, με παραπομπή στο ακριβές αρχείο. Δες και <code>/graphify path "Α" "Β"</code> για τη διαδρομή ανάμεσα σε δύο πράγματα, και <code>/graphify explain "Χ"</code> για εξήγηση ενός κόμβου.</li>
+        <li>Όταν αλλάξεις αρχεία, τρέξε <code>/graphify . --update</code> για να ανανεωθεί μόνο ό,τι άλλαξε. Με <code>--watch</code> ενημερώνεται αυτόματα καθώς δουλεύεις.</li>
+      </ol>
+    </section>
+
+    <section class="steps">
+      <h2>Πηγή</h2>
+      <p>Επίσημο repo με όλες τις οδηγίες και τον κώδικα: <a href="https://github.com/safishamsi/graphify" target="_blank" rel="noopener">github.com/safishamsi/graphify</a></p>
+      <p>Site: <a href="https://graphify.net" target="_blank" rel="noopener">graphify.net</a></p>
+    </section>
+
+    <footer>
+      <a href="../">videos</a>
+      <a href="https://github.com/dgodolias/videos" target="_blank" rel="noopener">github</a>
+    </footer>
+  </main>
+
+  <script>
+    const btn = document.getElementById('copy');
+    const label = document.getElementById('copy-label');
+    const pre = document.getElementById('prompt-text');
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(pre.textContent);
+        label.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(() => { label.textContent = 'Copy'; btn.classList.remove('copied'); }, 1800);
+      } catch (e) {
+        label.textContent = 'Press Ctrl+C';
+      }
+    });
+  </script>
+</body>
+</html>
