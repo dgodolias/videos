@@ -21,27 +21,6 @@
       <p>Κάνε οποιονδήποτε φάκελο, κώδικα, docs ή PDF, έναν χάρτη που δείχνει πώς συνδέονται όλα. Μετά το Claude Code ρωτάει τον χάρτη αντί να ξαναδιαβάζει κάθε αρχείο, οπότε γλιτώνεις tokens. Είναι open source και τρέχει στον υπολογιστή σου.</p>
     </section>
 
-    <div class="prompt-card">
-      <div class="toolbar">
-        <span class="label">commands</span>
-        <button id="copy" class="btn-pill" type="button" aria-label="Copy commands to clipboard">
-          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-          </svg>
-          <span id="copy-label">Copy</span>
-        </button>
-      </div>
-      <pre id="prompt-text"># 1. Εγκατάσταση (μία φορά, στο terminal)
-pip install graphifyy && graphify install
-
-# 2. Φτιάξε τον χάρτη — μέσα στο Claude Code, στον φάκελό σου
-/graphify .
-
-# 3. Ρώτα το (το AI κοιτάζει τον χάρτη, δεν ξαναδιαβάζει τα αρχεία)
-/graphify query "πώς συνδέεται το Χ με το Υ;"</pre>
-    </div>
-
     <section class="steps">
       <h2>Βήματα αναλυτικά</h2>
       <ol>
@@ -64,21 +43,5 @@ pip install graphifyy && graphify install
       <a href="https://github.com/dgodolias/videos" target="_blank" rel="noopener">github</a>
     </footer>
   </main>
-
-  <script>
-    const btn = document.getElementById('copy');
-    const label = document.getElementById('copy-label');
-    const pre = document.getElementById('prompt-text');
-    btn.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(pre.textContent);
-        label.textContent = 'Copied';
-        btn.classList.add('copied');
-        setTimeout(() => { label.textContent = 'Copy'; btn.classList.remove('copied'); }, 1800);
-      } catch (e) {
-        label.textContent = 'Press Ctrl+C';
-      }
-    });
-  </script>
 </body>
 </html>
