@@ -12,7 +12,11 @@ export default function ResourceCard({ resource }: { resource: Resource }) {
       : 'resource-thumb pair';
 
   return (
-    <li className="resource-item">
+    <li
+      className="resource-item"
+      data-status={card.status ?? 'active'}
+      data-visible-after={card.visibleAfter}
+    >
       <Link className="resource-card" to={'/' + resource.slug}>
         <span className={thumbClass}>
           {thumb.type === 'solo' ? (

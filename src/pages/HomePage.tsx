@@ -1,18 +1,34 @@
-import Seo from '../components/Seo';
-import Topbar from '../components/Topbar';
+import { useEffect, useMemo, useState } from 'react';
 import FeaturedResource from '../components/FeaturedResource';
 import SearchFilter from '../components/SearchFilter';
+import Seo from '../components/Seo';
 import SiteFooter from '../components/SiteFooter';
-import { gridResources, featuredResource } from '../data/resources';
+import Topbar from '../components/Topbar';
+import { featuredResource, gridResources } from '../data/resources';
 import { site } from '../data/site';
+import { isReleasedOnHomepage } from '../lib/release';
 import { websiteLd } from '../lib/seo';
 
-/** Derived hero stats (replaces the old hardcoded, stale numbers). */
-const total = gridResources.length;
-const prompts = gridResources.filter((r) => r.card!.filters.includes('prompt')).length;
-const latest = gridResources[0]?.card!.metaLine.split('·')[0].trim().split(' ').slice(0, 2).join(' ') ?? '';
-
 export default function HomePage() {
+  const [now, setNow] = useState(0);
+
+  useEffect(() => {
+    setNow(Date.now());
+    const id = window.setInterval(() => setNow(Date.now()), 60_000);
+    return () => window.clearInterval(id);
+  }, []);
+
+  const homepageResources = useMemo(
+    () => gridResources.filter((resource) => isReleasedOnHomepage(resource, now)),
+    [now],
+  );
+
+  /** Derived hero stats (replaces the old hardcoded, stale numbers). */
+  const total = homepageResources.length;
+  const prompts = homepageResources.filter((resource) => resource.card!.filters.includes('prompt')).length;
+  const latest =
+    homepageResources[0]?.card!.metaLine.split('·')[0].trim().split(' ').slice(0, 2).join(' ') ?? '';
+
   return (
     <>
       <Seo
@@ -49,7 +65,7 @@ export default function HomePage() {
           {featuredResource && <FeaturedResource resource={featuredResource} />}
         </section>
 
-        <SearchFilter resources={gridResources} />
+        <SearchFilter resources={homepageResources} />
 
         <SiteFooter />
       </main>

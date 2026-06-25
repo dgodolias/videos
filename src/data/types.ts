@@ -54,6 +54,8 @@ export interface ResourceCardData {
   searchTags: string[];
   filters: FilterTag[];
   thumb: Thumb;
+  status?: 'active' | 'inactive' | 'scheduled';
+  visibleAfter?: string;
   featured?: boolean;
 }
 

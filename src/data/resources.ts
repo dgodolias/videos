@@ -20,6 +20,88 @@ const officialThumb = {
 };
 
 export const resources: Resource[] = [
+  {
+    slug: 'say-my-name',
+    pageKind: 'prompt',
+    date: '2026-06-25',
+    card: {
+      title: 'Δώσε όνομα στο ChatGPT',
+      desc: 'Ένα απλό context-rot test για μεγάλα ChatGPT chats, και το prompt για να συνεχίσεις σε νέο chat χωρίς να χάσεις τη συνέχεια.',
+      metaLine: '25 Ιουν 2026 · Prompt',
+      cardTags: ['ChatGPT', 'Context rot', 'Prompt'],
+      searchTags: [
+        'prompt',
+        'chatgpt',
+        'context',
+        'context rot',
+        'summary',
+        'σύνοψη',
+        'ai',
+        'productivity',
+      ],
+      filters: ['prompt', 'guide'],
+      status: 'scheduled',
+      visibleAfter: '2026-06-28T21:30:00+03:00',
+      thumb: {
+        type: 'solo',
+        src: '/thumbs/say-my-name_thumb.jpg',
+        alt: 'Screenshot από ChatGPT prompt για σύνοψη συνομιλίας πριν από νέο chat',
+      },
+    },
+    seoTitle: 'Δώσε όνομα στο ChatGPT',
+    seoDescription:
+      'Το prompt για να κάνεις σύνοψη μιας μεγάλης συνομιλίας και να συνεχίσεις σε νέο ChatGPT chat χωρίς να χάσεις context.',
+    crumb: { label: 'videos', to: '/' },
+    heading: 'Δώσε όνομα στο ChatGPT',
+    introHtml:
+      'Αν ένα μεγάλο ChatGPT chat αρχίσει να ξεχνάει βασικές οδηγίες, μην προσπαθείς να το σώσεις με άλλα πέντε prompts. Πέρνα καθαρή σύνοψη σε νέο chat και συνέχισε από εκεί.',
+    citation: 'https://chatgpt.com',
+    blocks: [
+      {
+        kind: 'prompt',
+        label: 'conversation-summary.txt',
+        text: `Summarize this conversation so I can continue it in a new chat without losing context.
+
+Keep the summary in the same language as the conversation. If the conversation uses more than one language, use the main language of the conversation and keep important terms in their original language.
+
+Make the summary useful for any kind of conversation, including projects, ideas, studying, work, research, personal planning, technical problems, creative tasks, or ongoing decisions.
+
+Include only what is relevant:
+- the main goal of the conversation
+- what has already been discussed or decided
+- important facts, files, links, examples, constraints, or assumptions
+- preferences, tone, style, rules, or instructions that should carry over
+- what has been tried and what happened
+- open questions or unresolved issues
+- the next best steps
+- what the new chat should avoid assuming or forgetting
+
+Write it as a clean copy-paste prompt for the new chat.
+If something is unclear, write “unknown” instead of guessing.`,
+      },
+      {
+        kind: 'steps',
+        title: 'Οδηγίες',
+        items: [
+          'Άνοιξε το παλιό μεγάλο chat που έχει αρχίσει να μπερδεύεται.',
+          'Κάνε paste το prompt από πάνω και ζήτησε τη σύνοψη.',
+          'Άνοιξε νέο chat και κάνε paste τη σύνοψη ως πρώτο μήνυμα.',
+          'Συνέχισε εκεί, με καθαρό context και χωρίς να κουβαλάς όλο το παλιό θόρυβο.',
+        ],
+      },
+      {
+        kind: 'prose',
+        title: 'Πότε το χρησιμοποιείς',
+        html: '<p>Όταν η συζήτηση έχει μεγαλώσει πολύ, όταν παλιές οδηγίες θάβονται, ή όταν το AI σταματάει να ακολουθεί βασικά πράγματα που είχατε συμφωνήσει στην αρχή.</p>',
+      },
+      {
+        kind: 'prose',
+        title: 'Πηγή',
+        html: '<p>Companion prompt από το video. Δουλεύει σε ChatGPT, Claude, Gemini ή οποιοδήποτε chat model που μπορεί να συνοψίσει τη συζήτηση στην ίδια γλώσσα.</p>',
+      },
+    ],
+  },
+
   // ───────────────────────────── Founders Playbook ─────────────────────────
   {
     slug: 'founders-scale',
